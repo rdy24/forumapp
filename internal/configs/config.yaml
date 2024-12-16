@@ -1,0 +1,6 @@
+service:
+  port: ":8080"
+  secretJWT: "secret"
+
+database:
+  dataSourceName: "root:password@tcp(localhost:3306)/forumapp?parseTime=true"
