@@ -28,7 +28,7 @@ func (h *Handler) UpsertUserActivity(c *gin.Context) {
 		return
 	}
 
-	userId := c.GetInt64("user_id")
+	userId := c.GetInt64("userId")
 
 	err = h.postSvc.UpsertUserActivity(ctx, postId, userId, request)
 

@@ -29,7 +29,7 @@ func (h *Handler) CreateComment(c *gin.Context) {
 		return
 	}
 
-	userId := c.GetInt64("user_id")
+	userId := c.GetInt64("userId")
 
 	err = h.postSvc.CreateComment(ctx, postId, userId, req)
 

@@ -3,6 +3,7 @@ package memberships
 import (
 	"context"
 	"errors"
+	"strconv"
 	"time"
 
 	"github.com/rdy24/forumapp/internal/model/memberships"
@@ -13,7 +14,7 @@ import (
 )
 
 func (s *service) Login(ctx context.Context, req *memberships.LoginRequest) (string, string, error) {
-	user, err := s.membershipRepo.GetUser(ctx, req.Email, "")
+	user, err := s.membershipRepo.GetUser(ctx, req.Email, "", 0)
 
 	if err != nil {
 		log.Error().Err(err).Msg("failed to get user")
@@ -60,6 +61,10 @@ func (s *service) Login(ctx context.Context, req *memberships.LoginRequest) (str
 		UserId:       user.ID,
 		RefreshToken: refreshToken,
 		ExpiredAt:    time.Now().Add(10 * 24 * time.Hour),
+		CreatedAt:    time.Now(),
+		UpdatedAt:    time.Now(),
+		CreatedBy:    strconv.FormatInt(user.ID, 10),
+		UpdatedBy:    strconv.FormatInt(user.ID, 10),
 	})
 
 	if err != nil {
